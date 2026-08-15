@@ -1,0 +1,8 @@
+{
+  "name": "chipapp-native-project",
+  "private": true,
+  "version": "1.0.0",
+  "scripts": {
+    "server": "node termux/server.mjs"
+  }
+}

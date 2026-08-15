@@ -1,0 +1,12 @@
+node_modules/
+dist/
+.vite/
+*.log
+.DS_Store
+.gradle/
+.android-toolchain/
+app/build/
+*.jks
+*.keystore
+release/
+chipapp-messages.json
