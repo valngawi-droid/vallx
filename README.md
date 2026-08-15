@@ -4,7 +4,7 @@ ChipApp adalah aplikasi Android **native** (Java/Android Views, tanpa WebView) d
 
 ## Instal APK
 
-Unduh `ChipApp-release.apk` dari halaman **Actions** atau **Releases** repository, lalu izinkan *Install unknown apps* dan pasang APK. APK release ditandatangani oleh workflow build.
+Build APK release dengan Android Studio atau jalankan `scripts/build-signed.sh`. Hasilnya adalah `release/ChipApp-release.apk`. Izinkan *Install unknown apps* pada ponsel, buka file APK, lalu tekan **Instal**.
 
 ## Server Termux
 
