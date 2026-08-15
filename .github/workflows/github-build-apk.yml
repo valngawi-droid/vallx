@@ -1,0 +1,53 @@
+name: Build ChipApp Signed APK
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Java 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Setup Android SDK
+        uses: android-actions/setup-android@v3
+
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v4
+        with:
+          gradle-version: '8.9'
+
+      - name: Create release signing key
+        run: |
+          keytool -genkeypair -v \
+            -keystore "$RUNNER_TEMP/chipapp-release.jks" \
+            -storepass chipapp-build \
+            -keypass chipapp-build \
+            -alias chipapp \
+            -keyalg RSA -keysize 2048 -validity 10000 \
+            -dname "CN=ChipApp, OU=Mobile, O=ChipApp, L=Indonesia, C=ID"
+
+      - name: Build signed native APK
+        env:
+          CHIPAPP_KEYSTORE: ${{ runner.temp }}/chipapp-release.jks
+          CHIPAPP_STORE_PASSWORD: chipapp-build
+          CHIPAPP_KEY_ALIAS: chipapp
+          CHIPAPP_KEY_PASSWORD: chipapp-build
+        run: gradle :app:assembleRelease
+
+      - name: Prepare APK
+        run: cp app/build/outputs/apk/release/app-release.apk ChipApp-release.apk
+
+      - name: Upload signed APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: ChipApp-signed-apk
+          path: ChipApp-release.apk
+          retention-days: 30
