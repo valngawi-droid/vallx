@@ -1,6 +1,6 @@
-# ChipApp Native
+# ChipApp v3 Native
 
-ChipApp adalah aplikasi Android **native** (Java/Android Views, tanpa WebView) dengan pengalaman antarmuka bergaya iOS. Aplikasi berkomunikasi dengan server Node.js yang berjalan di Termux.
+ChipApp v3 adalah aplikasi Android **native** (Java/Android Views, tanpa WebView) dengan pengalaman antarmuka bergaya iOS. Aplikasi berkomunikasi dengan server Node.js yang berjalan di Termux.
 
 ## Instal APK
 
@@ -11,7 +11,7 @@ Build APK release dengan Android Studio atau jalankan `scripts/build-signed.sh`.
 ```bash
 pkg update
 pkg install nodejs git
-git clone -b arena/01a002ca-vallx https://github.com/valngawi-droid/vallx.git
+git clone -b main https://github.com/valngawi-droid/vallx.git
 cd vallx/termux
 npm start
 ```
