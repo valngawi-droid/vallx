@@ -1,0 +1,13 @@
+{
+  "name": "ChipApp",
+  "short_name": "ChipApp",
+  "description": "Ngobrol lebih dekat, setiap hari.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#6d50f5",
+  "orientation": "portrait-primary",
+  "icons": [
+    { "src": "/chipapp-icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
