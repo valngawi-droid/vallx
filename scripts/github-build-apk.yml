@@ -1,4 +1,4 @@
-name: Build ChipApp Signed APK
+name: Build ChipApp V3 Signed APK
 
 on:
   workflow_dispatch:
@@ -27,27 +27,27 @@ jobs:
       - name: Create release signing key
         run: |
           keytool -genkeypair -v \
-            -keystore "$RUNNER_TEMP/chipapp-release.jks" \
+            -keystore "$RUNNER_TEMP/chipapp-v3-release.jks" \
             -storepass chipapp-build \
             -keypass chipapp-build \
             -alias chipapp \
             -keyalg RSA -keysize 2048 -validity 10000 \
-            -dname "CN=ChipApp, OU=Mobile, O=ChipApp, L=Indonesia, C=ID"
+            -dname "CN=ChipApp V3, OU=Mobile, O=ChipApp, L=Indonesia, C=ID"
 
       - name: Build signed native APK
         env:
-          CHIPAPP_KEYSTORE: ${{ runner.temp }}/chipapp-release.jks
+          CHIPAPP_KEYSTORE: ${{ runner.temp }}/chipapp-v3-release.jks
           CHIPAPP_STORE_PASSWORD: chipapp-build
           CHIPAPP_KEY_ALIAS: chipapp
           CHIPAPP_KEY_PASSWORD: chipapp-build
         run: gradle :app:assembleRelease
 
       - name: Prepare APK
-        run: cp app/build/outputs/apk/release/app-release.apk ChipApp-release.apk
+        run: cp app/build/outputs/apk/release/app-release.apk ChipApp-V3-release.apk
 
       - name: Upload signed APK
         uses: actions/upload-artifact@v4
         with:
-          name: ChipApp-signed-apk
-          path: ChipApp-release.apk
+          name: ChipApp-V3-signed-apk
+          path: ChipApp-V3-release.apk
           retention-days: 30
